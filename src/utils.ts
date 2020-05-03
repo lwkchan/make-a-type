@@ -1,11 +1,10 @@
-import { window } from 'vscode';
-const transform = require('transform-json-types');
+import { window, env } from 'vscode';
 
-enum ErrorType {
+export enum ErrorType {
   INVALID_JS_OBJECT,
 }
 
-function handleError(error: Error, errorType: ErrorType): void {
+export function handleError(error: Error, errorType: ErrorType): void {
   let messageToDisplay = '';
 
   if (errorType === ErrorType.INVALID_JS_OBJECT) {
@@ -17,30 +16,10 @@ function handleError(error: Error, errorType: ErrorType): void {
 
 export function getSelectedText(): Promise<string> {
   const { selection, document } = window.activeTextEditor!;
-  return Promise.resolve(document.getText(selection).trim());
+  const selectedText = document.getText(selection).trim();
+  return Promise.resolve(selectedText);
 }
 
-export function parseJSObjectToJSON(jsObjectString: string): Promise<object> {
-  let stringToParse = jsObjectString;
-
-  if (jsObjectString[jsObjectString.length - 1] === ';') {
-    stringToParse = jsObjectString.slice(0, -1);
-  }
-
-  try {
-    const parsedObject = JSON.parse(
-      JSON.stringify(eval('(' + stringToParse + ')'), null, 2)
-    );
-    return Promise.resolve(parsedObject);
-  } catch (error) {
-    handleError(error, ErrorType.INVALID_JS_OBJECT);
-    return Promise.reject();
-  }
-}
-
-export async function transformJavascriptToTs(json: any): Promise<any> {
-  const jsonObject = await parseJSObjectToJSON(json); // parse to json first, as transforming to ts needs json first
-  return transform(jsonObject, {
-    lang: 'typescript',
-  });
+export function addToClipboard(string: string): void {
+  env.clipboard.writeText(string);
 }

@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
-import { getSelectedText, transformJavascriptToTs } from './utils';
+import { getSelectedText, addToClipboard } from './utils';
+import { transformJavascriptToTs } from './transformers';
 
 export function activate(context: vscode.ExtensionContext) {
   let disposable = vscode.commands.registerCommand(
@@ -7,14 +8,14 @@ export function activate(context: vscode.ExtensionContext) {
     () => {
       getSelectedText()
         .then((json) => transformJavascriptToTs(json))
-        .then((result) => {
-          vscode.env.clipboard.writeText(result);
-        });
+        .then((result) => addToClipboard(result))
+        .then(() =>
+          vscode.window.showInformationMessage('Interface copied to clipboard')
+        );
     }
   );
 
   context.subscriptions.push(disposable);
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() {}
