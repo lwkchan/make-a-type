@@ -1,6 +1,6 @@
 # make-a-type README
 
-Highlight a JS Object, and get a TypeScript interface in your clipboard
+https://marketplace.visualstudio.com/items?itemName=lwkchan.make-a-type
 
 ## Features
 
