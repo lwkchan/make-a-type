@@ -4,10 +4,14 @@ export enum ErrorType {
   INVALID_JS_OBJECT,
 }
 
-export function handleError(error: Error, errorType: ErrorType): void {
-  let messageToDisplay = '';
+function isError(maybeError: Error | unknown): maybeError is Error {
+  return maybeError !== null && typeof maybeError === 'object';
+}
 
-  if (errorType === ErrorType.INVALID_JS_OBJECT) {
+export function handleError(error: Error | unknown, errorType: ErrorType): void {
+  let messageToDisplay = 'Something went wrong';
+
+  if (errorType === ErrorType.INVALID_JS_OBJECT && isError(error)) {
     messageToDisplay = `Invalid JavaScript object: ${error.message}`;
   }
 
