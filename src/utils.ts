@@ -18,6 +18,14 @@ export function handleError(error: Error | unknown, errorType: ErrorType): void 
   window.showErrorMessage(messageToDisplay);
 }
 
+export function isObjectString(string: string): boolean {
+  if (string.startsWith("{") && string.endsWith("}")) {
+    return true;
+  }
+
+  return false;
+}
+
 export function getSelectedText(): Promise<string> {
   const { selection, document } = window.activeTextEditor!;
   const selectedText = document.getText(selection).trim();
