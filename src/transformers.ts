@@ -1,17 +1,24 @@
 import transform from 'transform-json-types';
-import { handleError, ErrorType } from './utils';
+import { handleError, ErrorType, isObjectString } from './utils';
 
-export function parseJSObjectToJSON(jsObjectString: string): Promise<object> {
-  let stringToParse = jsObjectString;
-
-  if (jsObjectString[jsObjectString.length - 1] === ';') {
-    stringToParse = jsObjectString.slice(0, -1);
-  }
+function parseJSObjectToJSON(jsObjectString: string): Promise<object> {
 
   try {
+    let stringToParse = jsObjectString;
+
+    if (jsObjectString[jsObjectString.length - 1] !== '}') {
+      stringToParse = jsObjectString.slice(0, -1); // accounts for ending ';' and ','
+    }
+
+    if (!isObjectString(stringToParse)) {
+      throw new Error('Invalid JS object');
+    }
+
+    const object = eval('(' + stringToParse + ')'); // wrapping in () to return the whole object
     const parsedObject = JSON.parse(
-      JSON.stringify(eval('(' + stringToParse + ')'), null, 2)
+      JSON.stringify(object, null, 2)
     );
+
     return Promise.resolve(parsedObject);
   } catch (error) {
     handleError(error, ErrorType.INVALID_JS_OBJECT);
