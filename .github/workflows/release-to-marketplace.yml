@@ -1,9 +1,9 @@
+---
 name: Release
 on:
   push:
     branches:
       - master
-
 jobs:
   release:
     name: Release
@@ -18,6 +18,6 @@ jobs:
         id: release
       - name: Publish
         if: steps.release.outputs.released == 'true'
-          run: npm run deploy
-          env:
-            VSCE_PAT: ${{ secrets.VSCE_PAT }}
+        run: npm run deploy
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
