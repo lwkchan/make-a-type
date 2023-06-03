@@ -1,6 +1,7 @@
 {
   "name": "make-a-type",
   "displayName": "make a type",
+  "repository": "https://github.com/lwkchan/make-a-type",
   "publisher": "lwkchan",
   "description": "",
   "version": "0.0.3",
@@ -26,6 +27,7 @@
     ]
   },
   "scripts": {
+    "deploy": "vsce publish --yarn",
     "vscode:prepublish": "webpack --mode production",
     "compile": "tsc -p ./",
     "lint": "eslint src --ext ts",
@@ -42,6 +44,7 @@
     "@types/vscode": "^1.44.0",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
+    "@vscode/vsce": "^2.19.0",
     "eslint": "^6.8.0",
     "glob": "^7.1.6",
     "mocha": "^7.1.2",
