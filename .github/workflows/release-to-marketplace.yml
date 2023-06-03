@@ -1,12 +1,23 @@
+name: Release
 on:
   push:
     branches:
-      - main
+      - master
+
+jobs:
   release:
-    types:
-      - created
-- name: Publish
-  if: success() && startsWith(github.ref, 'refs/tags/') && matrix.os == 'ubuntu-latest'
-  run: npm run deploy
-  env:
-    VSCE_PAT: ${{ secrets.VSCE_PAT }}
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Automatic GitHub Release
+        uses: justincy/github-action-npm-release@2.0.1
+        id: release
+      - name: Publish
+        if: steps.release.outputs.released == 'true'
+          run: npm run deploy
+          env:
+            VSCE_PAT: ${{ secrets.VSCE_PAT }}
