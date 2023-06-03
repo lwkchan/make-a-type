@@ -13,11 +13,17 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+      - name: Install dependencies
+        run: yarn
       - name: Automatic GitHub Release
         uses: justincy/github-action-npm-release@2.0.1
         id: release
       - name: Publish
         if: steps.release.outputs.released == 'true'
-        run: npm run deploy
+        run: yarn deploy
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
