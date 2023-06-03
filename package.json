@@ -1,12 +1,12 @@
 {
   "name": "make-a-type",
   "displayName": "make a type",
+  "description": "Highlight JS object and generate TS interface in clipboard.",
   "repository": {
     "type": "git",
     "url": "https://github.com/lwkchan/make-a-type"
   },
   "publisher": "lwkchan",
-  "description": "",
   "version": "0.0.4",
   "engines": {
     "vscode": "^1.44.0"
