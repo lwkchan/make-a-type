@@ -1,6 +1,6 @@
 {
   "name": "make-a-type",
-  "displayName": "make a type",
+  "displayName": "TS type to clipboard",
   "description": "Highlight JS object and generate TS interface in clipboard.",
   "repository": {
     "type": "git",
