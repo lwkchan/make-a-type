@@ -1,10 +1,13 @@
 {
   "name": "make-a-type",
   "displayName": "make a type",
-  "repository": "https://github.com/lwkchan/make-a-type",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lwkchan/make-a-type"
+  },
   "publisher": "lwkchan",
   "description": "",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "engines": {
     "vscode": "^1.44.0"
   },
