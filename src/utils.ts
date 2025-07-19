@@ -1,17 +1,17 @@
-import { window, env } from 'vscode';
+import { window, env } from "vscode";
 
 export enum ErrorType {
-  INVALID_JS_OBJECT,
+  invalidJsObject,
 }
 
 function isError(maybeError: Error | unknown): maybeError is Error {
-  return maybeError !== null && typeof maybeError === 'object';
+  return maybeError !== null && typeof maybeError === "object";
 }
 
 export function handleError(error: Error | unknown, errorType: ErrorType): void {
-  let messageToDisplay = 'Something went wrong';
+  let messageToDisplay = "Something went wrong";
 
-  if (errorType === ErrorType.INVALID_JS_OBJECT && isError(error)) {
+  if (errorType === ErrorType.invalidJsObject && isError(error)) {
     messageToDisplay = `Invalid JavaScript object: ${error.message}`;
   }
 
