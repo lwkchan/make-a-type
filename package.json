@@ -60,5 +60,6 @@
   },
   "dependencies": {
     "transform-json-types": "^0.7.0"
-  }
+  },
+  "packageManager": "yarn@4.9.2"
 }
