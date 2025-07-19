@@ -7,7 +7,7 @@
     "url": "https://github.com/lwkchan/make-a-type"
   },
   "publisher": "lwkchan",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "engines": {
     "vscode": "^1.44.0"
   },
@@ -30,12 +30,12 @@
     ]
   },
   "scripts": {
-    "deploy": "vsce publish --yarn",
+    "deploy": "vsce publish",
     "vscode:prepublish": "webpack --mode production",
     "compile": "tsc -p ./",
     "lint": "eslint src --ext ts",
     "watch": "tsc -watch -p ./",
-    "pretest": "yarn run compile && yarn run lint",
+    "pretest": "npm run compile && npm run lint",
     "test": "node ./out/test/runTest.js",
     "dev": "webpack --mode development --watch",
     "test-compile": "tsc -p ./"
@@ -61,5 +61,5 @@
   "dependencies": {
     "transform-json-types": "^0.7.0"
   },
-  "packageManager": "yarn@4.9.2"
+  "packageManager": "npm@10.9.2"
 }
