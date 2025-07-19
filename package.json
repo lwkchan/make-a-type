@@ -7,7 +7,7 @@
     "url": "https://github.com/lwkchan/make-a-type"
   },
   "publisher": "lwkchan",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.44.0"
   },
